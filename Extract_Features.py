@@ -2,11 +2,17 @@ import os
 import cv2
 import numpy as np
 from key_frame_extraction import extract_keyframes
-from model import extract_features_from_frame
+from test_model import extract_features_from_frame
 
+def save_features_and_labels(X, y, output_folder):
+    os.makedirs(output_folder, exist_ok=True)
+    np.save(os.path.join(output_folder, 'X_features.npy'), X)
+    np.save(os.path.join(output_folder, 'y_labels.npy'), y)
 
 # Define the root folder containing subfolders with video files
-root_folder = "D:/git/video_to_frame_augmentation/Kathakali dataset video/"
+root_folder = "D:/git/video_to_frame_augmentation/Kathakali dataset video/test"
+output_folder = "D:/git/output_folder/"
+
 
 # Initialize lists to store features and labels
 X = []  # Features
@@ -41,3 +47,4 @@ for folder in os.listdir(root_folder):
 X = np.array(X)
 y = np.array(y)
 
+save_features_and_labels(X, y, output_folder)
