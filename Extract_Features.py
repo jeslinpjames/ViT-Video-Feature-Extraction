@@ -15,13 +15,12 @@ os.makedirs(output_folder, exist_ok=True)
 # Iterate through all subfolders in the root folder
 for folder in os.listdir(root_folder):
     folder_path = os.path.join(root_folder, folder)
-    output_subfolder = os.path.join(output_folder, folder)
-
-    # Create a subfolder in the output folder for each label
-    os.makedirs(output_subfolder, exist_ok=True)
 
     # Check if it's a directory (subfolder)
     if os.path.isdir(folder_path):
+        # Create an empty list to store features for all frames in this subfolder
+        all_features = []
+
         # Iterate through video files in the subfolder
         for video_file in os.listdir(folder_path):
             if video_file.endswith(".mp4"):
@@ -33,15 +32,22 @@ for folder in os.listdir(root_folder):
                     print(f"No keyframes extracted from {video_path}.")
                 else:
                     print(f"Extracted {len(keyframes)} keyframes from {video_path}.")
-
-                for idx, frame in enumerate(keyframes):
+                x=0
+                for frame in keyframes:
                     # Extract features from keyframes using the vision transformer
+                    x+=1
                     frame_features = extract_features_from_frame(frame)
+                    print(x,"/",len(keyframes))
+                    # Append the features to the list for this subfolder
+                    all_features.append(frame_features)
 
-                    # Convert tensor to a list
-                    frame_features = frame_features.tolist()
+        if all_features:
+            # Stack all features vertically to create a single 2D array
+            all_features = np.vstack(all_features)
 
-                    # Save features to a CSV file for each frame
-                    output_csv_file = os.path.join(output_subfolder, f"{video_file.split('.')[0]}_frame{idx}.csv")
-                    df = pd.DataFrame({'X': frame_features})
-                    df.to_csv(output_csv_file, index=False)
+            # Create a DataFrame with columns for each feature
+            df = pd.DataFrame(data=all_features)
+
+            # Save the features for all frames in a single CSV file
+            output_csv_file = os.path.join(output_folder, f"{folder}.csv")
+            df.to_csv(output_csv_file, index=False)
