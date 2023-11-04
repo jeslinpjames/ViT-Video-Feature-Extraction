@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import pandas as pd
 from key_frame_extraction import extract_keyframes
-from test_model import extract_features_from_frame
+from image_feature_extraction_with_ViT import extract_features_from_frame
 
 # Define the root folder containing subfolders with video files
 root_folder = "D:/git/video_to_frame_augmentation/Kathakali dataset video/test"
