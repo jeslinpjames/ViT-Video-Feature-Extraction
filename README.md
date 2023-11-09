@@ -21,4 +21,4 @@ Before using this tool, make sure you have the following dependencies installed:
 You can install the required libraries using pip:
 
 ```bash
-pip install opencv-python numpy pandas pytorch_pretrained_vit
+pip install opencv-python numpy pillow pandas pytorch_pretrained_vit
