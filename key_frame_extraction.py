@@ -1,7 +1,7 @@
 import os
 import cv2
 
-def extract_keyframes(video_path, min_frame_difference=25000000):
+def extract_keyframes(video_path, min_frame_difference=15000000):
     vid = cv2.VideoCapture(video_path)
     keyframes = []  # Initialize a list to store keyframes
 
