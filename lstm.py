@@ -19,7 +19,8 @@ max_rows = 590
 
 for csv_file in csv_files:
     df = pd.read_csv(os.path.join(folder_path, csv_file))
-    df = df.head(max_rows)
+    df = shuffle(df)  # Shuffle the rows
+    df = df.head(max_rows)  
     data.append(df.to_numpy())
     labels.extend([csv_file.split(".")[0]] * len(df))
 
