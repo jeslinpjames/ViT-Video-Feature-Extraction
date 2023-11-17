@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 import os
-import cv2
-import time
 import tensorflow as tf
 from image_feature_extraction_with_ViT import extract_features_from_frame
 from keras.models import Sequential
