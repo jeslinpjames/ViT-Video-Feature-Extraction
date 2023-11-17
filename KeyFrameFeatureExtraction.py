@@ -18,9 +18,6 @@ for folder in os.listdir(root_folder):
 
     # Check if it's a directory (subfolder)
     if os.path.isdir(folder_path):
-        # Create an empty list to store features for all frames in this subfolder
-        all_features = []
-
         # Iterate through video files in the subfolder
         for video_file in os.listdir(folder_path):
             if video_file.endswith(".mp4"):
@@ -32,22 +29,23 @@ for folder in os.listdir(root_folder):
                     print(f"No keyframes extracted from {video_path}.")
                 else:
                     print(f"Extracted {len(keyframes)} keyframes from {video_path}.")
-                x=0
-                for frame in keyframes:
-                    # Extract features from keyframes using the vision transformer
-                    x+=1
-                    frame_features = extract_features_from_frame(frame)
-                    print(x,"/",len(keyframes))
-                    # Append the features to the list for this subfolder
-                    all_features.append(frame_features)
+                    all_features = []
+                    x = 0
+                    for frame in keyframes:
+                        # Extract features from keyframes using the vision transformer
+                        x+=1
+                        frame_features = extract_features_from_frame(frame)
+                        print(x,"/",len(keyframes))
+                        # Append the features to the list for this subfolder
+                        all_features.append(frame_features)
 
-        if all_features:
-            # Stack all features vertically to create a single 2D array
-            all_features = np.vstack(all_features)
+                    if all_features:
+                        # Stack all features vertically to create a single 2D array
+                        all_features = np.vstack(all_features)
 
-            # Create a DataFrame with columns for each feature
-            df = pd.DataFrame(data=all_features)
+                        # Create a DataFrame with columns for each feature
+                        df = pd.DataFrame(data=all_features)
 
-            # Save the features for all frames in a single CSV file
-            output_csv_file = os.path.join(output_folder, f"{folder}.csv")
-            df.to_csv(output_csv_file, index=False)
+                        # Save the features for all frames in a single CSV file
+                        output_csv_file = os.path.join(output_folder, f"{os.path.splitext(video_file)[0]}.csv")
+                        df.to_csv(output_csv_file, index=False)
