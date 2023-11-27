@@ -51,11 +51,11 @@ The `lstm.py` script uses an LSTM network for classification based on features e
 ### Requirements
 
 - Python 
-- Libraries: `numpy`, `pandas`, `tensorflow`, `keras`, `scikit-learn`, `matplotlib`, `seaborn`, `timm`
+- Libraries: `numpy`, `pandas`, `keras`, `scikit-learn`, `matplotlib`, `seaborn`, `timm`
 
 
 You can install the required libraries using pip:
 
 ```bash
-pip install tensorflow keras opencv-python numpy matplotlib seaborn pandas scikit-learn timm
+pip install keras opencv-python numpy matplotlib seaborn pandas scikit-learn timm
 
