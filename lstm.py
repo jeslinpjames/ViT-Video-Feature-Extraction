@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import os
-import tensorflow as tf
 from image_feature_extraction_with_ViT import extract_features_from_frame
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
@@ -33,7 +32,6 @@ for csv_file in csv_files:
     labels.extend([class_label])
     # print(class_label)
 # Set random seeds
-tf.random.set_seed(42)
 random.seed(42)
 np.random.seed(42)
 
